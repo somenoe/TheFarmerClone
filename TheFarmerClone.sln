@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TheFarmerClone", "TheFarmerClone", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "TheFarmerClone.Shared", "TheFarmerClone.Shared\TheFarmerClone.Shared.shproj", "{208E9786-4490-4CA5-968C-C35540B2F88D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheFarmerClone.Android", "TheFarmerClone.Android\TheFarmerClone.Android.csproj", "{A8536305-ACB8-4B31-B1E1-1807E8A297FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheFarmerClone.WindowsDX", "TheFarmerClone.WindowsDX\TheFarmerClone.WindowsDX.csproj", "{22D5738A-163A-4F40-B69D-DB41D87F2C32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheFarmerClone.DesktopGL", "TheFarmerClone.DesktopGL\TheFarmerClone.DesktopGL.csproj", "{D3F53FE7-93E9-470B-A741-5B4D19376D3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheFarmerClone.BlazorGL", "TheFarmerClone.BlazorGL\TheFarmerClone.BlazorGL.csproj", "{279C5814-AF99-41C5-AD44-82E5DB5AD803}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A8536305-ACB8-4B31-B1E1-1807E8A297FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8536305-ACB8-4B31-B1E1-1807E8A297FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8536305-ACB8-4B31-B1E1-1807E8A297FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8536305-ACB8-4B31-B1E1-1807E8A297FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22D5738A-163A-4F40-B69D-DB41D87F2C32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22D5738A-163A-4F40-B69D-DB41D87F2C32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22D5738A-163A-4F40-B69D-DB41D87F2C32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22D5738A-163A-4F40-B69D-DB41D87F2C32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3F53FE7-93E9-470B-A741-5B4D19376D3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3F53FE7-93E9-470B-A741-5B4D19376D3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3F53FE7-93E9-470B-A741-5B4D19376D3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3F53FE7-93E9-470B-A741-5B4D19376D3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{279C5814-AF99-41C5-AD44-82E5DB5AD803}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{279C5814-AF99-41C5-AD44-82E5DB5AD803}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{279C5814-AF99-41C5-AD44-82E5DB5AD803}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{279C5814-AF99-41C5-AD44-82E5DB5AD803}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{208E9786-4490-4CA5-968C-C35540B2F88D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{A8536305-ACB8-4B31-B1E1-1807E8A297FC} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{22D5738A-163A-4F40-B69D-DB41D87F2C32} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{D3F53FE7-93E9-470B-A741-5B4D19376D3B} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{279C5814-AF99-41C5-AD44-82E5DB5AD803} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ABD9A138-559E-499F-B677-DEAF9733E488}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		TheFarmerClone.Shared\TheFarmerClone.Shared.projitems*{208e9786-4490-4ca5-968c-c35540b2f88d}*SharedItemsImports = 13
+		TheFarmerClone.Shared\TheFarmerClone.Shared.projitems*{22d5738a-163a-4f40-b69d-db41d87f2c32}*SharedItemsImports = 5
+		TheFarmerClone.Shared\TheFarmerClone.Shared.projitems*{279c5814-af99-41c5-ad44-82e5db5ad803}*SharedItemsImports = 5
+		TheFarmerClone.Shared\TheFarmerClone.Shared.projitems*{a8536305-acb8-4b31-b1e1-1807e8a297fc}*SharedItemsImports = 5
+		TheFarmerClone.Shared\TheFarmerClone.Shared.projitems*{d3f53fe7-93e9-470b-a741-5b4d19376d3b}*SharedItemsImports = 5
+	EndGlobalSection
+EndGlobal
