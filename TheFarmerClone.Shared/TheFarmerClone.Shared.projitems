@@ -15,5 +15,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Scenes\StartScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scenes\StoreMenuScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scenes\StoreOutsideScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\Button.cs" />
   </ItemGroup>
 </Project>
