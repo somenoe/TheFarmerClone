@@ -18,6 +18,9 @@ namespace TheFarmerClone.Scenes
         public Color HoverTextColor { get; set; } = Color.White;
         public Action OnClick { get; set; }
 
+        public bool isDebug { get; set; } = false;
+        public Color DebugBorderColor { get; set; } = Color.Red;
+
         private Texture2D _texture;
         private SpriteFont _font;
         private bool _wasPressedLastFrame = false;
@@ -39,6 +42,21 @@ namespace TheFarmerClone.Scenes
             var bgColor = _isHovering ? HoverBackgroundColor : BackgroundColor;
             var textColor = _isHovering ? HoverTextColor : TextColor;
             spriteBatch.Draw(_texture, new Rectangle((int)Position.X, (int)Position.Y, Width, Height), bgColor);
+
+            // Draw debug border if enabled
+            if (isDebug)
+            {
+                int borderThickness = 2;
+                Rectangle top = new Rectangle((int)Position.X, (int)Position.Y, Width, borderThickness);
+                Rectangle bottom = new Rectangle((int)Position.X, (int)Position.Y + Height - borderThickness, Width, borderThickness);
+                Rectangle left = new Rectangle((int)Position.X, (int)Position.Y, borderThickness, Height);
+                Rectangle right = new Rectangle((int)Position.X + Width - borderThickness, (int)Position.Y, borderThickness, Height);
+
+                spriteBatch.Draw(_texture, top, DebugBorderColor);
+                spriteBatch.Draw(_texture, bottom, DebugBorderColor);
+                spriteBatch.Draw(_texture, left, DebugBorderColor);
+                spriteBatch.Draw(_texture, right, DebugBorderColor);
+            }
 
             // Measure text and center it
             Vector2 textSize = _font.MeasureString(Label);

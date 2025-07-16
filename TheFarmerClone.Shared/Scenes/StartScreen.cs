@@ -12,6 +12,7 @@ namespace TheFarmerClone.Scenes
         private SpriteBatch _spriteBatch;
         private Texture2D _logoTexture;
         private Texture2D _whiteTexture;
+        private bool _isDebug = true;
 
         // Button components
         private Button _newGameButton;
@@ -48,6 +49,7 @@ namespace TheFarmerClone.Scenes
 
             _newGameButton = new Button(_whiteTexture, _font, newGamePos, buttonWidth, buttonHeight, "New Game")
             {
+                isDebug = _isDebug,
                 TextColor = Color.Blue,
                 BackgroundColor = Color.White,
                 HoverTextColor = Color.Red,
@@ -57,6 +59,7 @@ namespace TheFarmerClone.Scenes
 
             _loadGameButton = new Button(_whiteTexture, _font, loadGamePos, buttonWidth, buttonHeight, "Load Game")
             {
+                isDebug = _isDebug,
                 TextColor = Color.Blue,
                 BackgroundColor = Color.White,
                 HoverTextColor = Color.Red,
