@@ -6,6 +6,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
+using MonoGame.Extended.Screens;
+using MonoGame.Extended.Screens.Transitions;
+using TheFarmerClone.Scenes;
 
 namespace TheFarmerClone
 {
@@ -14,8 +17,11 @@ namespace TheFarmerClone
     /// </summary>
     public class TheFarmerCloneGame : Game
     {
+        private readonly ScreenManager _screenManager;
+        private GameScreen _activeScreen;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        private const float DefaultScreenTransitionTime = 0.2f;
 
         public TheFarmerCloneGame()
         {
@@ -27,6 +33,8 @@ namespace TheFarmerClone
             graphics.IsFullScreen = true;
 #endif
 
+            _screenManager = new ScreenManager();
+            Components.Add(_screenManager);
         }
 
         /// <summary>
@@ -38,7 +46,7 @@ namespace TheFarmerClone
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            LoadStartScreen();
             base.Initialize();
 
         }
@@ -84,6 +92,16 @@ namespace TheFarmerClone
             }
 
             // TODO: Add your update logic here
+            if (keyboardState.IsKeyDown(Keys.D1))
+                LoadStartScreen();
+            if (keyboardState.IsKeyDown(Keys.D2))
+                LoadStoreMenuScreen();
+            if (keyboardState.IsKeyDown(Keys.D3))
+                LoadStoreOutsideScreen();
+            if (keyboardState.IsKeyDown(Keys.D4))
+                LoadFarmScreen();
+            if (keyboardState.IsKeyDown(Keys.D5))
+                LoadFieldScreen();
 
             base.Update(gameTime);
         }
@@ -99,6 +117,46 @@ namespace TheFarmerClone
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
+        }
+
+        private void LoadStartScreen()
+        {
+            if (_activeScreen is StartScreen) return;
+            var screen = new StartScreen(this);
+            _screenManager.LoadScreen(screen, new FadeTransition(GraphicsDevice, Color.Black, DefaultScreenTransitionTime));
+            _activeScreen = screen;
+        }
+
+        private void LoadStoreMenuScreen()
+        {
+            if (_activeScreen is StoreMenuScreen) return;
+            var screen = new StoreMenuScreen(this);
+            _screenManager.LoadScreen(screen, new FadeTransition(GraphicsDevice, Color.Black, DefaultScreenTransitionTime));
+            _activeScreen = screen;
+        }
+
+        private void LoadStoreOutsideScreen()
+        {
+            if (_activeScreen is StoreOutsideScreen) return;
+            var screen = new StoreOutsideScreen(this);
+            _screenManager.LoadScreen(screen, new FadeTransition(GraphicsDevice, Color.Black, DefaultScreenTransitionTime));
+            _activeScreen = screen;
+        }
+
+        private void LoadFarmScreen()
+        {
+            if (_activeScreen is FarmScreen) return;
+            var screen = new FarmScreen(this);
+            _screenManager.LoadScreen(screen, new FadeTransition(GraphicsDevice, Color.Black, DefaultScreenTransitionTime));
+            _activeScreen = screen;
+        }
+
+        private void LoadFieldScreen()
+        {
+            if (_activeScreen is FieldScreen) return;
+            var screen = new FieldScreen(this);
+            _screenManager.LoadScreen(screen, new FadeTransition(GraphicsDevice, Color.Black, DefaultScreenTransitionTime));
+            _activeScreen = screen;
         }
     }
 }
