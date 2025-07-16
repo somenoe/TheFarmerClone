@@ -143,7 +143,7 @@ namespace TheFarmerClone
             _activeScreen = screen;
         }
 
-        private void LoadFarmScreen()
+        public void LoadFarmScreen()
         {
             if (_activeScreen is FarmScreen) return;
             var screen = new FarmScreen(this);
