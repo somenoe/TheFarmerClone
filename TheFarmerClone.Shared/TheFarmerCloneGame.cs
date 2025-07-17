@@ -37,6 +37,8 @@ namespace TheFarmerClone
 
             _screenManager = new ScreenManager();
             Components.Add(_screenManager);
+
+            Window.AllowUserResizing = true;
         }
 
         /// <summary>
