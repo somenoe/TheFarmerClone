@@ -22,6 +22,8 @@ namespace TheFarmerClone
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private const float DefaultScreenTransitionTime = 0.2f;
+        public bool isDebug = true;
+
 
         public TheFarmerCloneGame()
         {
@@ -98,6 +100,8 @@ namespace TheFarmerClone
                 LoadScreen(new NewGameScreen(this));
             if (keyboardState.IsKeyDown(Keys.D3))
                 LoadScreen(new LoadGameScreen(this));
+            if (keyboardState.IsKeyDown(Keys.D4))
+                LoadScreen(new FarmScreen(this));
 
             base.Update(gameTime);
         }

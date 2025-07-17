@@ -8,10 +8,7 @@ namespace TheFarmerClone.Scenes
     public class StartScreen : GameScreen
     {
         private TheFarmerCloneGame _game;
-        private SpriteFont _font;
         private SpriteBatch _spriteBatch;
-        private Texture2D _whiteTexture;
-        private bool _isDebug = true;
 
         // Struct for background calculations
         private struct Background
@@ -37,18 +34,17 @@ namespace TheFarmerClone.Scenes
         {
             base.LoadContent();
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            _font = Content.Load<SpriteFont>("font");
             _background.Texture = Content.Load<Texture2D>("screen.start");
-            // Create 1x1 white texture for rectangles
-            _whiteTexture = new Texture2D(GraphicsDevice, 1, 1);
-            _whiteTexture.SetData([Color.White]);
 
+            var font = Content.Load<SpriteFont>("font");
+            var whiteTexture = new Texture2D(GraphicsDevice, 1, 1);
+            whiteTexture.SetData([Color.White]);
 
             // Button layout is now handled in Update() to support resizing.
             // Initialize buttons with dummy positions.
-            _newGameButton = new Button(_whiteTexture, _font, Vector2.Zero, 200, 60, "New Game")
+            _newGameButton = new Button(whiteTexture, font, Vector2.Zero, 200, 60, "New Game")
             {
-                isDebug = _isDebug,
+                isDebug = _game.isDebug,
                 TextColor = Color.White,
                 BackgroundColor = Color.Transparent,
                 HoverTextColor = Color.Red,
@@ -56,9 +52,9 @@ namespace TheFarmerClone.Scenes
                 OnClick = () => _game.LoadScreen(new NewGameScreen(_game))
             };
 
-            _loadGameButton = new Button(_whiteTexture, _font, Vector2.Zero, 200, 60, "Load Game")
+            _loadGameButton = new Button(whiteTexture, font, Vector2.Zero, 200, 60, "Load Game")
             {
-                isDebug = _isDebug,
+                isDebug = _game.isDebug,
                 TextColor = Color.White,
                 BackgroundColor = Color.Transparent,
                 HoverTextColor = Color.Red,
