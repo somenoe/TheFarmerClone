@@ -10,11 +10,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)TheFarmerCloneGame.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Scenes\FarmScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Scenes\FieldScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Scenes\StartScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Scenes\StoreMenuScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Scenes\StoreOutsideScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scenes\NewGameScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Scenes\LoadGameScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\Button.cs" />
   </ItemGroup>
 </Project>

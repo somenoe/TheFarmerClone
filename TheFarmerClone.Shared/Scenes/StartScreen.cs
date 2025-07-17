@@ -10,16 +10,23 @@ namespace TheFarmerClone.Scenes
         private TheFarmerCloneGame _game;
         private SpriteFont _font;
         private SpriteBatch _spriteBatch;
-        private Texture2D _logoTexture;
         private Texture2D _whiteTexture;
         private bool _isDebug = true;
+
+        // Struct for background calculations
+        private struct Background
+        {
+            public Texture2D Texture;
+            public float Scale;
+            public float ScaledWidth;
+            public float ScaledHeight;
+            public Vector2 Position;
+        }
+        private Background _background;
 
         // Button components
         private Button _newGameButton;
         private Button _loadGameButton;
-
-        // Scale factor for logo and buttons
-        private const float _uiScale = 0.5f;
 
         public StartScreen(TheFarmerCloneGame game) : base(game)
         {
@@ -31,45 +38,62 @@ namespace TheFarmerClone.Scenes
             base.LoadContent();
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _font = Content.Load<SpriteFont>("font");
-            _logoTexture = Content.Load<Texture2D>("logo");
+            _background.Texture = Content.Load<Texture2D>("screen.start");
             // Create 1x1 white texture for rectangles
             _whiteTexture = new Texture2D(GraphicsDevice, 1, 1);
-            _whiteTexture.SetData(new[] { Color.White });
+            _whiteTexture.SetData([Color.White]);
 
-            // Button layout
+
+            // Button layout is now handled in Update() to support resizing.
+            // Initialize buttons with dummy positions.
+            _newGameButton = new Button(_whiteTexture, _font, Vector2.Zero, 200, 60, "New Game")
+            {
+                isDebug = _isDebug,
+                TextColor = Color.White,
+                BackgroundColor = Color.Transparent,
+                HoverTextColor = Color.Red,
+                HoverBackgroundColor = Color.Transparent,
+                OnClick = () => _game.LoadScreen(new NewGameScreen(_game))
+            };
+
+            _loadGameButton = new Button(_whiteTexture, _font, Vector2.Zero, 200, 60, "Load Game")
+            {
+                isDebug = _isDebug,
+                TextColor = Color.White,
+                BackgroundColor = Color.Transparent,
+                HoverTextColor = Color.Red,
+                HoverBackgroundColor = Color.Transparent,
+                OnClick = () => _game.LoadScreen(new LoadGameScreen(_game))
+            };
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+
+            // Calculate background scale and position
             var viewport = GraphicsDevice.Viewport;
-            float buttonMargin = 40f;
-            float buttonSpacing = 20f;
-            int buttonWidth = 200;
-            int buttonHeight = 60;
-            float buttonsStartY = viewport.Height - buttonHeight * 2 - buttonSpacing - buttonMargin;
+            float scaleX = (float)viewport.Width / _background.Texture.Width;
+            float scaleY = (float)viewport.Height / _background.Texture.Height;
+            _background.Scale = System.Math.Min(scaleX, scaleY);
+            _background.ScaledWidth = _background.Texture.Width * _background.Scale;
+            _background.ScaledHeight = _background.Texture.Height * _background.Scale;
+            _background.Position = new Vector2(
+                (viewport.Width - _background.ScaledWidth) / 2f,
+                (viewport.Height - _background.ScaledHeight) / 2f
+            );
 
-            var newGamePos = new Vector2(viewport.Width - buttonWidth - buttonMargin, buttonsStartY);
-            var loadGamePos = new Vector2(viewport.Width - buttonWidth - buttonMargin, buttonsStartY + buttonHeight + buttonSpacing);
+            // Update button positions and dimensions
+            _newGameButton.Position = new Vector2(1_080, 820) * _background.Scale + _background.Position;
+            _newGameButton.Width = (int)(490 * _background.Scale);
+            _newGameButton.Height = (int)(100 * _background.Scale);
 
-            _newGameButton = new Button(_whiteTexture, _font, newGamePos, buttonWidth, buttonHeight, "New Game")
-            {
-                isDebug = _isDebug,
-                TextColor = Color.Blue,
-                BackgroundColor = Color.White,
-                HoverTextColor = Color.Red,
-                HoverBackgroundColor = Color.White,
-                OnClick = () => _game.LoadFarmScreen()
-            };
+            _loadGameButton.Position = new Vector2(1_060, 970) * _background.Scale + _background.Position;
+            _loadGameButton.Width = (int)(530 * _background.Scale);
+            _loadGameButton.Height = (int)(100 * _background.Scale);
 
-            _loadGameButton = new Button(_whiteTexture, _font, loadGamePos, buttonWidth, buttonHeight, "Load Game")
-            {
-                isDebug = _isDebug,
-                TextColor = Color.Blue,
-                BackgroundColor = Color.White,
-                HoverTextColor = Color.Red,
-                HoverBackgroundColor = Color.White,
-                OnClick = () =>
-                {
-                    /* TODO: Change to load game screen */
-                    System.Console.WriteLine("Click Load Game Button");
-                }
-            };
+            var mouseState = Microsoft.Xna.Framework.Input.Mouse.GetState();
+            _newGameButton.Update(mouseState);
+            _loadGameButton.Update(mouseState);
         }
 
         public override void Draw(GameTime gameTime)
@@ -77,28 +101,14 @@ namespace TheFarmerClone.Scenes
             GraphicsDevice.Clear(Color.PaleGreen);
             _spriteBatch.Begin();
 
-            // Center logo with scale
-            var viewport = GraphicsDevice.Viewport;
-            var scaledLogoWidth = _logoTexture.Width * _uiScale;
-            var scaledLogoHeight = _logoTexture.Height * _uiScale;
-            var logoPos = new Vector2(
-                (viewport.Width - scaledLogoWidth) / 2f,
-                (viewport.Height - scaledLogoHeight) / 2f
-            );
-            _spriteBatch.Draw(_logoTexture, logoPos, null, Color.White, 0f, Vector2.Zero, _uiScale, SpriteEffects.None, 0f);
+            // Draw background using precomputed values from Update
+            _spriteBatch.Draw(_background.Texture, _background.Position, null, Color.White, 0f, Vector2.Zero, _background.Scale, SpriteEffects.None, 0f);
 
             // Draw buttons using Button component
             _newGameButton.Draw(_spriteBatch);
             _loadGameButton.Draw(_spriteBatch);
 
             _spriteBatch.End();
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            var mouseState = Microsoft.Xna.Framework.Input.Mouse.GetState();
-            _newGameButton.Update(mouseState);
-            _loadGameButton.Update(mouseState);
         }
     }
 }

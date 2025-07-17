@@ -46,7 +46,7 @@ namespace TheFarmerClone
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            LoadStartScreen();
+            LoadScreen(new StartScreen(this));
             base.Initialize();
 
         }
@@ -93,15 +93,11 @@ namespace TheFarmerClone
 
             // TODO: Add your update logic here
             if (keyboardState.IsKeyDown(Keys.D1))
-                LoadStartScreen();
+                LoadScreen(new StartScreen(this));
             if (keyboardState.IsKeyDown(Keys.D2))
-                LoadStoreMenuScreen();
+                LoadScreen(new NewGameScreen(this));
             if (keyboardState.IsKeyDown(Keys.D3))
-                LoadStoreOutsideScreen();
-            if (keyboardState.IsKeyDown(Keys.D4))
-                LoadFarmScreen();
-            if (keyboardState.IsKeyDown(Keys.D5))
-                LoadFieldScreen();
+                LoadScreen(new LoadGameScreen(this));
 
             base.Update(gameTime);
         }
@@ -119,42 +115,9 @@ namespace TheFarmerClone
             base.Draw(gameTime);
         }
 
-        private void LoadStartScreen()
+        public void LoadScreen(GameScreen screen)
         {
-            if (_activeScreen is StartScreen) return;
-            var screen = new StartScreen(this);
-            _screenManager.LoadScreen(screen, new FadeTransition(GraphicsDevice, Color.Black, DefaultScreenTransitionTime));
-            _activeScreen = screen;
-        }
-
-        private void LoadStoreMenuScreen()
-        {
-            if (_activeScreen is StoreMenuScreen) return;
-            var screen = new StoreMenuScreen(this);
-            _screenManager.LoadScreen(screen, new FadeTransition(GraphicsDevice, Color.Black, DefaultScreenTransitionTime));
-            _activeScreen = screen;
-        }
-
-        private void LoadStoreOutsideScreen()
-        {
-            if (_activeScreen is StoreOutsideScreen) return;
-            var screen = new StoreOutsideScreen(this);
-            _screenManager.LoadScreen(screen, new FadeTransition(GraphicsDevice, Color.Black, DefaultScreenTransitionTime));
-            _activeScreen = screen;
-        }
-
-        public void LoadFarmScreen()
-        {
-            if (_activeScreen is FarmScreen) return;
-            var screen = new FarmScreen(this);
-            _screenManager.LoadScreen(screen, new FadeTransition(GraphicsDevice, Color.Black, DefaultScreenTransitionTime));
-            _activeScreen = screen;
-        }
-
-        private void LoadFieldScreen()
-        {
-            if (_activeScreen is FieldScreen) return;
-            var screen = new FieldScreen(this);
+            if (_activeScreen == screen) return;
             _screenManager.LoadScreen(screen, new FadeTransition(GraphicsDevice, Color.Black, DefaultScreenTransitionTime));
             _activeScreen = screen;
         }
