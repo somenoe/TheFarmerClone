@@ -95,3 +95,8 @@ a, .btn-link
     bottom: 0px;
     left: 0px;
 }
+
+/* Hide mouse cursor on game canvas */
+canvas {
+  cursor: none;
+}
